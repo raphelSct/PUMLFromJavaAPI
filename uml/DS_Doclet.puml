@@ -1,0 +1,10 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+skinparam style strictuml
+
+participant FirstDoclet.class as FirstDoclet
+participant Doclet as Doclet
+participant DocletEnvironment as DocletEnvironment
+participant SourceVersion as SourceVersion
+
+@enduml
