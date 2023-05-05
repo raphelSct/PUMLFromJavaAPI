@@ -1,0 +1,25 @@
+@startuml
+'https://plantuml.com/class-diagram
+skinparam style strictuml
+
+
+class ToolProvider {
+}
+interface DocletEnvironment{
+}
+class FirstDoclet implements Doclet{
+}
+interface Doclet {
+
+}
+
+class Java2Puml{
+}
+
+Java2Puml - ToolProvider : > utilise
+ToolProvider - Doclet : > crée
+Doclet - DocletEnvironment : > Fournit
+
+
+
+@enduml

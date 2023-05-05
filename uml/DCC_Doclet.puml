@@ -1,0 +1,41 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+skinparam style strictuml
+
+
+class ToolProvider {
+    + findFirst(String name) : static Optional<ToolProvider>
+    + run(PrintWriter out, PrintWriter err, String... args):int
+}
+interface DocletEnvironment{
+    +getDocTrees():DocTrees
+    +getElementUtils():Elements
+    +getSourceVersion() : SourceVersion
+    +getModuleMode():DocletEnvironment.ModuleMode
+}
+interface Doclet {
+    + getName():String
+    + getSupportedOptions():Set<? extends Doclet.Option>
+    + getSupportedSourceVersion() : SourceVersion
+    + init(Locale locale, Reporter reporter)
+    + run(DocletEnvironment environment) : Boolean
+}
+class FirstDoclet implements Doclet{
+    + getName():String
+    + getSupportedOptions():Set<? extends Doclet.Option>
+    + getSupportedSourceVersion() : SourceVersion
+    + init(Locale locale, Reporter reporter)
+    + run(DocletEnvironment environment) : Boolean
+    +dumpElement(Element element)
+
+}
+class Java2Puml{
+    + main(String[] args)
+}
+Java2Puml -> ToolProvider :  utilise
+ToolProvider -> Doclet :  crée
+Doclet -> DocletEnvironment :  Fournit
+
+
+@enduml
