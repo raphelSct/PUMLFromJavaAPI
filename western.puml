@@ -1,0 +1,16 @@
+@startuml
+skinparam style strictuml
+class Boisson
+class Brigand
+class Cowboy
+class Dame
+class Histoire4
+class Narrateur
+class Personnage
+class Ripou
+class Substantif
+class Sherif
+interface HorsLaLoi <<interface>>
+interface Nommable <<interface>>
+enum Genre <<interface>>
+@enduml
