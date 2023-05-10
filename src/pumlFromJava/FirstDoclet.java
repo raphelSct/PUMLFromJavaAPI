@@ -107,7 +107,7 @@ public class FirstDoclet implements Doclet {
             }
 
             for (String enumName : enumList) {
-                writer.println("enum " + enumName + " <<interface>>");
+                writer.println("enum " + enumName + " <<enum>>");
             }
 
             writer.println("@enduml");

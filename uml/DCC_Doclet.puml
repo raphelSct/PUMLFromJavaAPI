@@ -11,6 +11,7 @@ class ToolProvider {
 interface DocletEnvironment{
     +getDocTrees():DocTrees
     +getElementUtils():Elements
+    +getKind(): Elements
     +getSourceVersion() : SourceVersion
     +getModuleMode():DocletEnvironment.ModuleMode
 }

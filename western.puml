@@ -8,8 +8,8 @@ class Histoire4
 class Narrateur
 class Personnage
 class Ripou
-class Substantif
 class Sherif
+class Substantif
 interface HorsLaLoi <<interface>>
 interface Nommable <<interface>>
 enum Genre <<interface>>
