@@ -12,5 +12,5 @@ class Sherif
 class Substantif
 interface HorsLaLoi <<interface>>
 interface Nommable <<interface>>
-enum Genre <<interface>>
+enum Genre <<enum>>
 @enduml

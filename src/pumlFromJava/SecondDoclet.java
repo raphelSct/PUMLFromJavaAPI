@@ -6,9 +6,11 @@ import jdk.javadoc.doclet.Reporter;
 
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
-import java.util.Collections;
-import java.util.Locale;
-import java.util.Set;
+import javax.lang.model.element.ElementKind;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.util.*;
 
 /**
  * Doclets : https://openjdk.org/groups/compiler/processing-code.html
@@ -25,7 +27,20 @@ import java.util.Set;
  * A minimal doclet that just prints out the names of the
  * selected elements.
  */
-public class FirstDoclet implements Doclet {
+public class SecondDoclet implements Doclet {
+    private final OptionOut out=new OptionOut();
+    private final OptionD path = new OptionD();
+
+    /**
+     * A base class for declaring options.
+     * Subtypes for specific options should implement
+     * the  method
+     * to handle instances of the option found on the
+     * command line.
+     */
+
+
+
     @Override
     public void init(Locale locale, Reporter reporter) {  }
 
@@ -41,7 +56,7 @@ public class FirstDoclet implements Doclet {
     @Override
     public Set<? extends Option> getSupportedOptions() {
         // This doclet does not support any options.
-        return Collections.emptySet();
+        return Set.of(out,path);
     }
 
     @Override
@@ -69,15 +84,36 @@ public class FirstDoclet implements Doclet {
         return true;
     }
 
+
     private void dumpElement(Element element)
     {
-        System.out.print("---- ");
-        System.out.println("element: " + element);
-        System.out.println("kind: " + element.getKind());
-        System.out.println("simpleName: " + element.getSimpleName());
-        System.out.println("enclosingElement: " + element.getEnclosingElement());
-        System.out.println("enclosedElement: " + element.getEnclosedElements());
-        System.out.println("modifiers: " + element.getModifiers());
-        System.out.println();
+        // Récupérer les classes, interfaces et énumérations inclus dans l'élément spécifié.
+        List<Element> elements = new ArrayList<>();
+        elements.add(element);
+        elements.addAll(element.getEnclosedElements());
+
+        // Créer un diagramme UML à partir des éléments spécifiés.
+        PumlDiagram diagram = new PumlDiagram();
+        for (Element e : elements) {
+            if (e.getKind() == ElementKind.CLASS) {
+                diagram.addClass(e.getSimpleName().toString());
+            } else if (e.getKind() == ElementKind.INTERFACE) {
+                diagram.addInterface(e.getSimpleName().toString());
+            } else if (e.getKind() == ElementKind.ENUM) {
+                diagram.addEnum(e.getSimpleName().toString());
+            }
+        }
+
+        // Écrire le diagramme UML dans un fichier de sortie.
+        String filename = out.nomFichier + ".puml";
+        filename= path.chemin+filename;
+        try {
+            diagram.generate(filename);
+            System.out.println("Le diagramme UML a été écrit dans le fichier " + filename + ".");
+        } catch (FileNotFoundException e) {
+            System.err.println("Erreur lors de l'écriture du fichier " + filename + ".");
+            e.printStackTrace();
+        }
+
     }
 }

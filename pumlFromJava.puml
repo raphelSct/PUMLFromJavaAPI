@@ -1,5 +1,0 @@
-@startuml
-skinparam style strictuml
-class FirstDoclet
-class Java2Puml
-@enduml
