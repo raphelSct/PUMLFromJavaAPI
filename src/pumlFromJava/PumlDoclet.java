@@ -27,7 +27,7 @@ import java.util.*;
  * A minimal doclet that just prints out the names of the
  * selected elements.
  */
-public class SecondDoclet implements Doclet {
+public class PumlDoclet implements Doclet {
     private final OptionOut out=new OptionOut();
     private final OptionD path = new OptionD();
 
@@ -105,8 +105,8 @@ public class SecondDoclet implements Doclet {
         }
 
         // Écrire le diagramme UML dans un fichier de sortie.
-        String filename = out.nomFichier + ".puml";
-        filename= path.chemin+filename;
+        String filename = out.getNomFichier() + ".puml";
+        filename= path.getChemin()+filename;
         try {
             diagram.generate(filename);
             System.out.println("Le diagramme UML a été écrit dans le fichier " + filename + ".");

@@ -5,7 +5,7 @@ import jdk.javadoc.doclet.Doclet;
 import java.util.List;
 
 public class OptionOut implements Doclet.Option{
-    String nomFichier;
+    private  String nomFichier;
 
     @Override
     public int getArgumentCount() {

@@ -17,6 +17,7 @@ public class PumlDiagram {
         enumList = new ArrayList<>();
     }
 
+
     public void addClass(String className) {
         classList.add(className);
     }

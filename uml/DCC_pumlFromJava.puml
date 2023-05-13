@@ -1,0 +1,69 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+package pumlFromjava{
+    class FirstDoclet implements Doclet{
+    + getName():String
+    + getSupportedOptions():Set<? extends Doclet.Option>
+    + getSupportedSourceVersion() : SourceVersion
+    + init(Locale locale, Reporter reporter)
+    + run(DocletEnvironment environment) : Boolean
+    +dumpElement(Element element)
+    }
+    class Java2Puml{
+    + main(String[] args)
+    }
+    class OptionD implements Doclet.Option{
+    -chemin:String
+    +getArgumentCount():int
+    +getDescription():String
+    +getKind():Kind
+    +getNames():List<String>
+    +getParameters():String
+    +process(option:String,arguments:List<String>):boolean
+    +getChemin():String
+    }
+    class OptionOut implements Doclet.Option{
+    -nomFichier:String
+    +getArgumentCount():int
+    +getDescription():String
+    +getKind():Kind
+    +getNames():List<String>
+    +getParameters():String
+    +process(option:String,arguments:List<String>):boolean
+    +getNomFichier():String
+    }
+    class PumlDiagram{
+    -classList:List<String> {ReadOnly}
+    -interfaceList:List<String> {ReadOnly}
+    -enumList:List<String> {ReadOnly}
+    +<<Create>> PumlDiagram()
+    +addClass()
+    +addInterface()
+    +addEnum()
+    +generate()
+    }
+    class PumlDoclet implements Doclet{
+    + getName():String
+    + getSupportedOptions():Set<? extends Doclet.Option>
+    + getSupportedSourceVersion() : SourceVersion
+    + init(Locale locale, Reporter reporter)
+    + run(DocletEnvironment environment) : Boolean
+    +dumpElement(Element element)
+    }
+    interface Doclet{
+    + getName():String
+    + getSupportedOptions():Set<? extends Doclet.Option>
+    + getSupportedSourceVersion() : SourceVersion
+    + init(Locale locale, Reporter reporter)
+    + run(DocletEnvironment environment) : Boolean
+    }
+PumlDoclet "1"-->"1" OptionD:  <<Create>>
+PumlDoclet "1"-->"1" PumlDiagram: <<Create>>
+PumlDoclet "1"-->"1" OptionOut :  <<Create>>
+Java2Puml "1"-->"1" PumlDoclet : Prend en arguments
+Java2Puml "1"->"1" OptionOut :  Prend en option
+Java2Puml "1"->"1" OptionD :  Prend en option
+}
+
+@enduml

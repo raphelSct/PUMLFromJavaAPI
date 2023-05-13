@@ -5,7 +5,7 @@ import jdk.javadoc.doclet.Doclet;
 import java.util.List;
 
 public class OptionD implements Doclet.Option {
-    String chemin;
+    private String chemin;
     @Override
     public int getArgumentCount() {
         return 1;
