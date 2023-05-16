@@ -55,7 +55,7 @@ public class PumlDoclet implements Doclet {
         elements.addAll(element.getEnclosedElements());
 
         // Créer un diagramme UML à partir des éléments spécifiés.
-        PumlDiagram diagram = new PumlDiagram();
+        PumlDiagramDCA diagram = new PumlDiagramDCA();
 
         for (Element e : elements) {
             if (e.getKind() == ElementKind.PACKAGE){

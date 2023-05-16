@@ -3,158 +3,53 @@ skinparam style strictuml
 skinparam classFontStyle Bold
 skinparam classAttributeIconSize 0
 package western{
-class Dame {
-  - estLibre
-  - sauveur
-  - ravisseur
-  + getPseudo
-  + seFaireKidnapper
-  + seFaireLiberer
-  + estLibre
-  + sePresenter
-  - boissonParDefaut
-  + getBoissonParDefaut
-  + setBoissonParDefaut
-  + getRavisseur
-}
-
-class Sherif {
-  - cowboy
-  - wanted
-  + getNom
-  + sePresenter
-  + capturer
-  + getWanted
-  + rechercher
-  + isWanted
-}
-
-class Personnage {
-  - BOISSON_PAR_DEFAUT
-  - nom
-  - boisson
-  + dire
-  + sePresenter
-  + boire
-  + boire
-  + getNom
-  + getBoisson
-  + getPseudos
-  + getBoissonParDefaut
-}
-
-class Ripou {
-  - brigand
-  + getLook
-  + estLibre
-  + getRecompense
-  + kidnapper
-  + getCaptives
-  + seFaireCapturer
-  + seFaireTirerDessus
-  + getPseudo
-  + sePresenter
-  + liberer
-}
-
-class Narrateur {
-  + dire
-  + boire
-  + boire
-  + getPseudo
-}
-
-class Cowboy {
-  - gains
-  - captures
-  + getPseudo
-  + liberer
-  + liberer
-  + capturer
-  + tirerSur
-  + sePresenter
-  - boissonParDefaut
-  + getBoissonParDefaut
-  + setBoissonParDefaut
+class Boisson {
 }
 
 class Brigand {
-  # LOOK_PAR_DEFAUT
-  - look
-  - recompense
-  - estLibre
-  - captives
-  - gardien
-  + getLook
-  + getRecompense
-  + estLibre
-  + kidnapper
-  + getCaptives
-  + seFaireCapturer
-  + seFaireTirerDessus
-  + getPseudo
-  + sePresenter
-  - boissonParDefaut
-  + getBoissonParDefaut
-  + setBoissonParDefaut
+LOOK_PAR_DEFAUT
+look
+recompense
+estLibre
 }
 
-class Boisson {
-  - substantif
-  + EAU
-  - boissons
-  + of
-  + getNom
-  + getGenre
-  + getNomAvecArticleIndefini
-  + getNomAvecArticlePartitif
-  + getNomAvecArticleDefini
-  + getNomAvecPreposition
+class Cowboy {
+gains
 }
 
-class Substantif {
-  - nom
-  - genre
-  + getNom
-  + getGenre
-  + toString
-  + isVowel
-  + startsWithVowel
-  + getArticleIndefini
-  + avecArticleIndefini
-  + getArticleDefini
-  + getArticleDefini
-  + avecArticleDefini
-  + faireElision
-  + elision
-  + getArticlePartitif
-  + avecArticlePartitif
-  + avecElision
-  + avecPreposition
+class Dame {
+estLibre
 }
 
 class Histoire4 {
-  + main
+}
+
+class Narrateur {
+}
+
+class Personnage {
+nom
+}
+
+class Ripou {
+}
+
+class Sherif {
+}
+
+class Substantif {
+nom
 }
 
 interface HorsLaLoi <<interface>> {
-  + estLibre
-  + getRecompense
-  + kidnapper
-  + seFaireCapturer
-  + seFaireTirerDessus
-  + getLook
-  + getCaptives
 }
 
 interface Nommable <<interface>> {
-  + getNom
-  + getPseudo
 }
 
 enum Genre <<enumerate>> {
-  + FEMININ
-  + MASCULIN
+FEMININ
+MASCULIN
 }
 
 }
