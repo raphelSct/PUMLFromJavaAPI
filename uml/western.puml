@@ -1,16 +1,159 @@
 @startuml
 skinparam style strictuml
-class Boisson
-class Brigand
-class Cowboy
-class Dame
-class Histoire4
-class Narrateur
-class Personnage
-class Ripou
-class Sherif
-class Substantif
-interface HorsLaLoi <<interface>>
-interface Nommable <<interface>>
-enum Genre <<enum>>
+skinparam classFontStyle Bold
+skinparam classAttributeIconSize 0
+class Boisson {
+  - substantif
+  + EAU
+  - boissons
+  + of
+  + getNom
+  + getGenre
+  + getNomAvecArticleIndefini
+  + getNomAvecArticlePartitif
+  + getNomAvecArticleDefini
+  + getNomAvecPreposition
+}
+
+class Brigand {
+  # LOOK_PAR_DEFAUT
+  - look
+  - recompense
+  - estLibre
+  - captives
+  - gardien
+  + getLook
+  + getRecompense
+  + estLibre
+  + kidnapper
+  + getCaptives
+  + seFaireCapturer
+  + seFaireTirerDessus
+  + getPseudo
+  + sePresenter
+  - boissonParDefaut
+  + getBoissonParDefaut
+  + setBoissonParDefaut
+}
+
+class Cowboy {
+  - gains
+  - captures
+  + getPseudo
+  + liberer
+  + liberer
+  + capturer
+  + tirerSur
+  + sePresenter
+  - boissonParDefaut
+  + getBoissonParDefaut
+  + setBoissonParDefaut
+}
+
+class Dame {
+  - estLibre
+  - sauveur
+  - ravisseur
+  + getPseudo
+  + seFaireKidnapper
+  + seFaireLiberer
+  + estLibre
+  + sePresenter
+  - boissonParDefaut
+  + getBoissonParDefaut
+  + setBoissonParDefaut
+  + getRavisseur
+}
+
+class Histoire4 {
+  + main
+}
+
+class Narrateur {
+  + dire
+  + boire
+  + boire
+  + getPseudo
+}
+
+class Personnage {
+  - BOISSON_PAR_DEFAUT
+  - nom
+  - boisson
+  + dire
+  + sePresenter
+  + boire
+  + boire
+  + getNom
+  + getBoisson
+  + getPseudos
+  + getBoissonParDefaut
+}
+
+class Ripou {
+  - brigand
+  + getLook
+  + estLibre
+  + getRecompense
+  + kidnapper
+  + getCaptives
+  + seFaireCapturer
+  + seFaireTirerDessus
+  + getPseudo
+  + sePresenter
+  + liberer
+}
+
+class Sherif {
+  - cowboy
+  - wanted
+  + getNom
+  + sePresenter
+  + capturer
+  + getWanted
+  + rechercher
+  + isWanted
+}
+
+class Substantif {
+  - nom
+  - genre
+  + getNom
+  + getGenre
+  + toString
+  + isVowel
+  + startsWithVowel
+  + getArticleIndefini
+  + avecArticleIndefini
+  + getArticleDefini
+  + getArticleDefini
+  + avecArticleDefini
+  + faireElision
+  + elision
+  + getArticlePartitif
+  + avecArticlePartitif
+  + avecElision
+  + avecPreposition
+}
+
+interface HorsLaLoi <<interface>> {
+  + estLibre
+  + getRecompense
+  + kidnapper
+  + seFaireCapturer
+  + seFaireTirerDessus
+  + getLook
+  + getCaptives
+}
+
+interface Nommable <<interface>> {
+  + getNom
+  + getPseudo
+}
+
+enum Genre <<enumerate>> {
+  + FEMININ
+  + MASCULIN
+}
+
 @enduml

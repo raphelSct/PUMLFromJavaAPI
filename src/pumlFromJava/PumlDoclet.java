@@ -96,11 +96,11 @@ public class PumlDoclet implements Doclet {
         PumlDiagram diagram = new PumlDiagram();
         for (Element e : elements) {
             if (e.getKind() == ElementKind.CLASS) {
-                diagram.addClass(e.getSimpleName().toString());
+                diagram.addClass(e);
             } else if (e.getKind() == ElementKind.INTERFACE) {
-                diagram.addInterface(e.getSimpleName().toString());
+                diagram.addInterface(e);
             } else if (e.getKind() == ElementKind.ENUM) {
-                diagram.addEnum(e.getSimpleName().toString());
+                diagram.addEnum(e);
             }
         }
 
