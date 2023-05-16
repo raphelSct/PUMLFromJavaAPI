@@ -15,6 +15,8 @@ public class PumlDiagram {
     private final List<String> interfaceList;
     private final List<String> enumList;
 
+    private String packageName;
+
     public PumlDiagram() {
         classList = new ArrayList<>();
         interfaceList = new ArrayList<>();
@@ -66,9 +68,13 @@ public class PumlDiagram {
         enumContent.append("}\n");
         enumList.add(enumContent.toString());
     }
+    public void addPackage(Element packElement){
+        this.packageName = "package " + packElement.getSimpleName().toString() + "{";
+    }
     public String getVisibility(Element element)
     {
         Set<Modifier> modifiers = element.getModifiers();
+
         if (modifiers.contains(Modifier.PUBLIC))
         {
             return "+";
@@ -93,6 +99,7 @@ public class PumlDiagram {
         writer.println("skinparam style strictuml");
         writer.println("skinparam classFontStyle Bold");
         writer.println("skinparam classAttributeIconSize 0");
+        writer.println(packageName);
         for (String className : classList) {
             writer.println(className);
         }
@@ -104,7 +111,7 @@ public class PumlDiagram {
         for (String enumName : enumList) {
             writer.println(enumName );
         }
-
+        writer.println("}");
         writer.println("@enduml");
         writer.close();
     }

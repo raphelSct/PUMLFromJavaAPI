@@ -2,54 +2,7 @@
 skinparam style strictuml
 skinparam classFontStyle Bold
 skinparam classAttributeIconSize 0
-class Boisson {
-  - substantif
-  + EAU
-  - boissons
-  + of
-  + getNom
-  + getGenre
-  + getNomAvecArticleIndefini
-  + getNomAvecArticlePartitif
-  + getNomAvecArticleDefini
-  + getNomAvecPreposition
-}
-
-class Brigand {
-  # LOOK_PAR_DEFAUT
-  - look
-  - recompense
-  - estLibre
-  - captives
-  - gardien
-  + getLook
-  + getRecompense
-  + estLibre
-  + kidnapper
-  + getCaptives
-  + seFaireCapturer
-  + seFaireTirerDessus
-  + getPseudo
-  + sePresenter
-  - boissonParDefaut
-  + getBoissonParDefaut
-  + setBoissonParDefaut
-}
-
-class Cowboy {
-  - gains
-  - captures
-  + getPseudo
-  + liberer
-  + liberer
-  + capturer
-  + tirerSur
-  + sePresenter
-  - boissonParDefaut
-  + getBoissonParDefaut
-  + setBoissonParDefaut
-}
-
+package western{
 class Dame {
   - estLibre
   - sauveur
@@ -65,15 +18,15 @@ class Dame {
   + getRavisseur
 }
 
-class Histoire4 {
-  + main
-}
-
-class Narrateur {
-  + dire
-  + boire
-  + boire
-  + getPseudo
+class Sherif {
+  - cowboy
+  - wanted
+  + getNom
+  + sePresenter
+  + capturer
+  + getWanted
+  + rechercher
+  + isWanted
 }
 
 class Personnage {
@@ -104,15 +57,59 @@ class Ripou {
   + liberer
 }
 
-class Sherif {
-  - cowboy
-  - wanted
-  + getNom
-  + sePresenter
+class Narrateur {
+  + dire
+  + boire
+  + boire
+  + getPseudo
+}
+
+class Cowboy {
+  - gains
+  - captures
+  + getPseudo
+  + liberer
+  + liberer
   + capturer
-  + getWanted
-  + rechercher
-  + isWanted
+  + tirerSur
+  + sePresenter
+  - boissonParDefaut
+  + getBoissonParDefaut
+  + setBoissonParDefaut
+}
+
+class Brigand {
+  # LOOK_PAR_DEFAUT
+  - look
+  - recompense
+  - estLibre
+  - captives
+  - gardien
+  + getLook
+  + getRecompense
+  + estLibre
+  + kidnapper
+  + getCaptives
+  + seFaireCapturer
+  + seFaireTirerDessus
+  + getPseudo
+  + sePresenter
+  - boissonParDefaut
+  + getBoissonParDefaut
+  + setBoissonParDefaut
+}
+
+class Boisson {
+  - substantif
+  + EAU
+  - boissons
+  + of
+  + getNom
+  + getGenre
+  + getNomAvecArticleIndefini
+  + getNomAvecArticlePartitif
+  + getNomAvecArticleDefini
+  + getNomAvecPreposition
 }
 
 class Substantif {
@@ -136,6 +133,10 @@ class Substantif {
   + avecPreposition
 }
 
+class Histoire4 {
+  + main
+}
+
 interface HorsLaLoi <<interface>> {
   + estLibre
   + getRecompense
@@ -156,4 +157,5 @@ enum Genre <<enumerate>> {
   + MASCULIN
 }
 
+}
 @enduml
