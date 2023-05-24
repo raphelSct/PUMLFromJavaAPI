@@ -68,6 +68,7 @@ public class PumlDoclet implements Doclet {
             } else if (e.getKind() == ElementKind.ENUM) {
                 diagram.addEnum(e);
             }
+            diagram.addLink(e);
         }
 
         // Écrire le diagramme UML dans un fichier de sortie.

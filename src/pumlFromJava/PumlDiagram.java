@@ -30,7 +30,7 @@ public class PumlDiagram {
         // On ajoute le contenu de chaque classe (méthodes et variables)
         for (Element enclosedElement : classElement.getEnclosedElements()) {
             if (enclosedElement.getKind() == ElementKind.METHOD) {
-                classContent.append("  " + getVisibility(enclosedElement) + " " + enclosedElement.getSimpleName() + "\n");
+                classContent.append("  " + getVisibility(enclosedElement) + " " + enclosedElement.getSimpleName() + "()\n");
             }
             else if (enclosedElement.getKind() == ElementKind.FIELD) {
                 classContent.append("  " + getVisibility(enclosedElement) + " " + enclosedElement.getSimpleName() + "\n");
@@ -46,7 +46,7 @@ public class PumlDiagram {
 
         for (Element enclosedElement : interfaceElement.getEnclosedElements()) {
             if (enclosedElement.getKind() == ElementKind.METHOD) {
-                interfaceContent.append("  " + getVisibility(enclosedElement) + " " + enclosedElement.getSimpleName() +"\n");
+                interfaceContent.append("  " + getVisibility(enclosedElement) + " " + enclosedElement.getSimpleName() +"()\n");
             }
         }
         interfaceContent.append("}\n");

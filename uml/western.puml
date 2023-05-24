@@ -3,54 +3,76 @@ skinparam style strictuml
 skinparam classFontStyle Bold
 skinparam classAttributeIconSize 0
 package western{
-class Boisson {
+class western.Boisson {
 }
 
-class Brigand {
+class western.Brigand {
 LOOK_PAR_DEFAUT
 look
 recompense
 estLibre
 }
 
-class Cowboy {
+class western.Cowboy {
 gains
 }
 
-class Dame {
+class western.Dame {
 estLibre
 }
 
-class Histoire4 {
+class western.Histoire4 {
 }
 
-class Narrateur {
+class western.Narrateur {
 }
 
-class Personnage {
+class western.Personnage {
 nom
 }
 
-class Ripou {
+class western.Ripou {
 }
 
-class Sherif {
+class western.Sherif {
 }
 
-class Substantif {
+class western.Substantif {
 nom
 }
 
-interface HorsLaLoi <<interface>> {
+interface western.HorsLaLoi <<interface>> {
 }
 
-interface Nommable <<interface>> {
+interface western.Nommable <<interface>> {
 }
 
-enum Genre <<enumerate>> {
+enum western.Genre <<enumerate>> {
 FEMININ
 MASCULIN
 }
 
+western.HorsLaLoi <|.. western.Brigand
+western.Nommable <|.. western.Personnage
+western.HorsLaLoi <|.. western.Ripou
+western.Personnage <|-- western.Brigand
+western.Personnage <|-- western.Cowboy
+western.Personnage <|-- western.Dame
+western.Personnage <|-- western.Narrateur
+western.Cowboy <|-- western.Ripou
+western.Cowboy <|-- western.Sherif
+western.Boisson -- western.Substantif
+western.Boisson -- western.Boisson
+western.Brigand -- western.Cowboy
+western.Brigand -- western.Boisson
+western.Cowboy -- western.Boisson
+western.Dame -- western.Cowboy
+western.Dame -- western.HorsLaLoi
+western.Dame -- western.Boisson
+western.Personnage -- western.Boisson
+western.Personnage -- western.Boisson
+western.Ripou -- western.Brigand
+western.Sherif -- western.Cowboy
+western.Substantif -- western.Genre
 }
 @enduml
