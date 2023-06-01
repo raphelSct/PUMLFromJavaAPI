@@ -49,8 +49,7 @@ public class PumlDiagramDCA {
                 String res=enclosedElement.asType().toString().substring(0,packsize);
                 if(test.equals(res)){
                     this.subElements.add(classElement+" -- "+enclosedElement.asType());
-                    System.out.println("Bonjour");
-                }
+                    }
             }
         }
         classContent.append("}\n");

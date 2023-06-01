@@ -1,8 +1,6 @@
 package pumlFromJava;
 
-import javax.lang.model.element.Element;
-import javax.lang.model.element.ElementKind;
-import javax.lang.model.element.Modifier;
+import javax.lang.model.element.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -27,10 +25,21 @@ public class PumlDiagram {
     public void addClass(Element classElement) {
         String className = classElement.getSimpleName().toString();
         StringBuilder classContent = new StringBuilder("class " + className + " {\n");
+        String retour;
         // On ajoute le contenu de chaque classe (méthodes et variables)
         for (Element enclosedElement : classElement.getEnclosedElements()) {
             if (enclosedElement.getKind() == ElementKind.METHOD) {
-                classContent.append("  " + getVisibility(enclosedElement) + " " + enclosedElement.getSimpleName() + "()\n");
+                StringBuilder parameters = new StringBuilder();
+                retour=((ExecutableElement)enclosedElement).getReturnType().toString();
+                for(VariableElement tpe :((ExecutableElement) enclosedElement).getParameters()) {
+                    if (tpe.asType().getKind()==)
+                    parameters.append(tpe.toString()+" "+(tpe.asType()).getSimpleName()+" ");
+                }
+                classContent.append("  " + getVisibility(enclosedElement) + " " + enclosedElement.getSimpleName() + "("+parameters+"):"+retour+"\n");
+
+
+
+
             }
             else if (enclosedElement.getKind() == ElementKind.FIELD) {
                 classContent.append("  " + getVisibility(enclosedElement) + " " + enclosedElement.getSimpleName() + "\n");

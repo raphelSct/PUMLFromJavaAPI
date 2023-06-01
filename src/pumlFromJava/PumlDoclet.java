@@ -55,31 +55,38 @@ public class PumlDoclet implements Doclet {
         elements.addAll(element.getEnclosedElements());
 
         // Créer un diagramme UML à partir des éléments spécifiés.
-        PumlDiagramDCA diagram = new PumlDiagramDCA();
-
+        PumlDiagram diagram = new PumlDiagram();
+        PumlDiagramDCA dca = new PumlDiagramDCA();
         for (Element e : elements) {
             if (e.getKind() == ElementKind.PACKAGE){
                 diagram.addPackage(e);
+                dca.addPackage(e);
             }
             if (e.getKind() == ElementKind.CLASS) {
                 diagram.addClass(e);
+                dca.addClass(e);
             } else if (e.getKind() == ElementKind.INTERFACE) {
                 diagram.addInterface(e);
+                dca.addInterface(e);
             } else if (e.getKind() == ElementKind.ENUM) {
                 diagram.addEnum(e);
+                dca.addEnum(e);
             }
-            diagram.addLink(e);
+            dca.addLink(e);
         }
 
         // Écrire le diagramme UML dans un fichier de sortie.
-        String filename = out.getNomFichier() + ".puml";
-        filename= path.getChemin()+filename;
+        String filenamedca = out.getNomFichier() + "DCA.puml";
+        String filenamedcc = out.getNomFichier() + "DCC.puml";
+        filenamedca= path.getChemin()+filenamedca;
+        filenamedcc= path.getChemin()+filenamedcc;
         try {
-            diagram.generate(filename);
-            System.out.println("Le diagramme UML a été écrit dans le fichier " + filename + ".");
+            diagram.generate(filenamedcc);
+            dca.generate((filenamedca));
+            System.out.println("Le diagramme UML a été écrit dans le fichier " + filenamedca + ".");
         }
         catch (FileNotFoundException e) {
-            System.err.println("Erreur lors de l'écriture du fichier " + filename + ".");
+            System.err.println("Erreur lors de l'écriture du fichier " + filenamedca + ".");
             e.printStackTrace();
         }
 

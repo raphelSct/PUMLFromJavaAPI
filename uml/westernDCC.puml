@@ -1,0 +1,161 @@
+@startuml
+skinparam style strictuml
+skinparam classFontStyle Bold
+skinparam classAttributeIconSize 0
+package western{
+class Boisson {
+  - substantif
+  + EAU
+  - boissons
+  + of(nom java.lang.String genre western.Genre ):western.Boisson
+  + getNom():java.lang.String
+  + getGenre():western.Genre
+  + getNomAvecArticleIndefini():java.lang.String
+  + getNomAvecArticlePartitif():java.lang.String
+  + getNomAvecArticleDefini():java.lang.String
+  + getNomAvecPreposition(preposition java.lang.String ):java.lang.String
+}
+
+class Brigand {
+  # LOOK_PAR_DEFAUT
+  - look
+  - recompense
+  - estLibre
+  - captives
+  - gardien
+  + getLook():java.lang.String
+  + getRecompense():int
+  + estLibre():boolean
+  + kidnapper(dame western.Dame ):void
+  + getCaptives():java.util.List<western.Dame>
+  + seFaireCapturer(cowBoy western.Cowboy ):void
+  + seFaireTirerDessus(cowBoy western.Cowboy ):void
+  + getPseudo():java.lang.String
+  + sePresenter():void
+  - boissonParDefaut
+  + getBoissonParDefaut():western.Boisson
+  + setBoissonParDefaut(boisson western.Boisson ):void
+}
+
+class Cowboy {
+  - gains
+  - captures
+  + getPseudo():java.lang.String
+  + liberer(dame western.Dame ):void
+  + liberer(captives java.util.List<western.Dame> ):void
+  + capturer(horsLaLoi western.HorsLaLoi ):void
+  + tirerSur(brigand western.HorsLaLoi ):void
+  + sePresenter():void
+  - boissonParDefaut
+  + getBoissonParDefaut():western.Boisson
+  + setBoissonParDefaut(boisson western.Boisson ):void
+}
+
+class Dame {
+  - estLibre
+  - sauveur
+  - ravisseur
+  + getPseudo():java.lang.String
+  + seFaireKidnapper(horsLaLoi western.HorsLaLoi ):void
+  + seFaireLiberer(cowBoy western.Cowboy ):void
+  + estLibre():boolean
+  + sePresenter():void
+  - boissonParDefaut
+  + getBoissonParDefaut():western.Boisson
+  + setBoissonParDefaut(boisson western.Boisson ):void
+  + getRavisseur():western.HorsLaLoi
+}
+
+class Histoire4 {
+  + main(args java.lang.String[] ):void
+}
+
+class Narrateur {
+  + dire(texte java.lang.String ):void
+  + boire(boisson western.Boisson ):void
+  + boire():void
+  + getPseudo():java.lang.String
+}
+
+class Personnage {
+  - BOISSON_PAR_DEFAUT
+  - nom
+  - boisson
+  + dire(texte java.lang.String ):void
+  + sePresenter():void
+  + boire(boisson western.Boisson ):void
+  + boire():void
+  + getNom():java.lang.String
+  + getBoisson():western.Boisson
+  + getPseudos(personnages java.util.List<? extends western.Nommable> ):java.lang.String
+  + getBoissonParDefaut():western.Boisson
+}
+
+class Ripou {
+  - brigand
+  + getLook():java.lang.String
+  + estLibre():boolean
+  + getRecompense():int
+  + kidnapper(dame western.Dame ):void
+  + getCaptives():java.util.List<western.Dame>
+  + seFaireCapturer(cowBoy western.Cowboy ):void
+  + seFaireTirerDessus(cowBoy western.Cowboy ):void
+  + getPseudo():java.lang.String
+  + sePresenter():void
+  + liberer(dame western.Dame ):void
+}
+
+class Sherif {
+  - cowboy
+  - wanted
+  + getNom():java.lang.String
+  + sePresenter():void
+  + capturer(horsLaLoi western.HorsLaLoi ):void
+  + getWanted():java.util.List<western.HorsLaLoi>
+  + rechercher(horsLaLoi western.HorsLaLoi ):void
+  + isWanted(horsLaLoi western.HorsLaLoi ):java.lang.Boolean
+}
+
+class Substantif {
+  - nom
+  - genre
+  + getNom():java.lang.String
+  + getGenre():western.Genre
+  + toString():java.lang.String
+  + isVowel(c char ):boolean
+  + startsWithVowel(s java.lang.String ):boolean
+  + getArticleIndefini():java.lang.String
+  + avecArticleIndefini():java.lang.String
+  + getArticleDefini(genre western.Genre ):java.lang.String
+  + getArticleDefini():java.lang.String
+  + avecArticleDefini():java.lang.String
+  + faireElision(article java.lang.String ):java.lang.String
+  + elision():boolean
+  + getArticlePartitif():java.lang.String
+  + avecArticlePartitif():java.lang.String
+  + avecElision(article java.lang.String ):java.lang.String
+  + avecPreposition(preposition java.lang.String ):java.lang.String
+}
+
+interface HorsLaLoi <<interface>> {
+  + estLibre()
+  + getRecompense()
+  + kidnapper()
+  + seFaireCapturer()
+  + seFaireTirerDessus()
+  + getLook()
+  + getCaptives()
+}
+
+interface Nommable <<interface>> {
+  + getNom()
+  + getPseudo()
+}
+
+enum Genre <<enumerate>> {
+  + FEMININ
+  + MASCULIN
+}
+
+}
+@enduml
