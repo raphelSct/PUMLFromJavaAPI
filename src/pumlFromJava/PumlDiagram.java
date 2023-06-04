@@ -80,27 +80,7 @@ public class PumlDiagram {
     public void addPackage(Element packElement){
         this.packageName = "package " + packElement.getSimpleName().toString() + "{";
     }
-    public String getVisibility(Element element)
-    {
-        Set<Modifier> modifiers = element.getModifiers();
 
-        if (modifiers.contains(Modifier.PUBLIC))
-        {
-            return "+";
-        }
-        else if (modifiers.contains(Modifier.PRIVATE))
-        {
-            return "-";
-        }
-        else if (modifiers.contains(Modifier.PROTECTED))
-        {
-            return "#";
-        }
-        else
-        {
-            return "~";
-        }
-    }
 
     public void generate(String fileName) throws FileNotFoundException {
         PrintWriter writer = new PrintWriter(new File(fileName));
