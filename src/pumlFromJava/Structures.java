@@ -5,7 +5,7 @@ import javax.lang.model.element.Modifier;
 import java.util.Set;
 
 public class Structures {
-    protected static StringBuilder affiche;
+    protected static StringBuilder affiche=new StringBuilder();
     public Structures(){
 
     }

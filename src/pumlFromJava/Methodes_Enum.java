@@ -2,6 +2,7 @@ package pumlFromJava;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
+import javax.lang.model.element.Modifier;
 
 public class Methodes_Enum extends  Structures{
 
@@ -13,7 +14,13 @@ public class Methodes_Enum extends  Structures{
         for (Element enclosedElement : this.enumElement.getEnclosedElements()) {
             if (enclosedElement.getKind() == ElementKind.ENUM_CONSTANT)
             {
-                affiche.append("  " + getVisibility(enclosedElement) + " " + enclosedElement.getSimpleName() + "\n");
+                if(enclosedElement.getModifiers().contains(Modifier.STATIC)){
+                    affiche.append("  " + getVisibility(enclosedElement) + "{static} "+ enclosedElement.getSimpleName() + "\n");
+                }
+                else{
+                    affiche.append("  " + getVisibility(enclosedElement) + " "+ enclosedElement.getSimpleName() + "\n");
+                }
+
             }
         }
     }

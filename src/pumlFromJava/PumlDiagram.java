@@ -9,6 +9,11 @@ import java.util.List;
 import java.util.Set;
 
 public class PumlDiagram {
+
+    Structures el=new Structures();
+    protected Structures_Class Classes=new Structures_Class();
+    protected Structures_Interface Inter=new Structures_Interface();
+    protected  Structures_Enum Enumer=new Structures_Enum();
     private final List<String> classList;
     private final List<String> interfaceList;
     private final List<String> enumList;
@@ -23,59 +28,22 @@ public class PumlDiagram {
 
 
     public void addClass(Element classElement) {
-        String className = classElement.getSimpleName().toString();
-        StringBuilder classContent = new StringBuilder("class " + className + " {\n");
-        String retour;
-        // On ajoute le contenu de chaque classe (méthodes et variables)
-        for (Element enclosedElement : classElement.getEnclosedElements()) {
-            if (enclosedElement.getKind() == ElementKind.METHOD) {
-                StringBuilder parameters = new StringBuilder();
-                retour=((ExecutableElement)enclosedElement).getReturnType().toString();
-                for(VariableElement tpe :((ExecutableElement) enclosedElement).getParameters()) {
-                    if (tpe.asType().getKind()==)
-                    parameters.append(tpe.toString()+" "+(tpe.asType()).getSimpleName()+" ");
-                }
-                classContent.append("  " + getVisibility(enclosedElement) + " " + enclosedElement.getSimpleName() + "("+parameters+"):"+retour+"\n");
-
-
-
-
-            }
-            else if (enclosedElement.getKind() == ElementKind.FIELD) {
-                classContent.append("  " + getVisibility(enclosedElement) + " " + enclosedElement.getSimpleName() + "\n");
-            }
-        }
-        classContent.append("}\n");
-        classList.add(classContent.toString());
+        Classes.add_Class(classElement);
+        classList.add(el.affiche.toString());
+        el.affiche.delete(0,el.affiche.length());
     }
 
     public void addInterface(Element interfaceElement) {
-        String interfaceName = interfaceElement.getSimpleName().toString();
-        StringBuilder interfaceContent = new StringBuilder("interface " + interfaceName + " <<interface>> {\n");
-
-        for (Element enclosedElement : interfaceElement.getEnclosedElements()) {
-            if (enclosedElement.getKind() == ElementKind.METHOD) {
-                interfaceContent.append("  " + getVisibility(enclosedElement) + " " + enclosedElement.getSimpleName() +"()\n");
-            }
-        }
-        interfaceContent.append("}\n");
-        interfaceList.add(interfaceContent.toString());
+        Inter.addInterface(interfaceElement);
+        interfaceList.add(el.affiche.toString());
+        el.affiche.delete(0,el.affiche.length());
     }
 
 
     public void addEnum(Element enumElement) {
-        String enumName = enumElement.getSimpleName().toString();
-        StringBuilder enumContent = new StringBuilder("enum " + enumName + " <<enumerate>> {\n");
-
-        for (Element enclosedElement : enumElement.getEnclosedElements()) {
-            if (enclosedElement.getKind() == ElementKind.ENUM_CONSTANT)
-            {
-                enumContent.append("  " + getVisibility(enclosedElement) + " " + enclosedElement.getSimpleName() + "\n");
-            }
-        }
-
-        enumContent.append("}\n");
-        enumList.add(enumContent.toString());
+        Enumer.addEnum(enumElement);
+        enumList.add(el.affiche.toString());
+        el.affiche.delete(0,el.affiche.length());
     }
     public void addPackage(Element packElement){
         this.packageName = "package " + packElement.getSimpleName().toString() + "{";

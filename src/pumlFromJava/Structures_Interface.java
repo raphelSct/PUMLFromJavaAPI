@@ -8,10 +8,10 @@ public class Structures_Interface extends Structures{
     }
     public void addInterface(Element interfaceElement){
         String interfaceName = interfaceElement.getSimpleName().toString();
-        StringBuilder interfaceContent = new StringBuilder("interface " + interfaceName + " <<interface>> {\n");
+        affiche = new StringBuilder("interface " + interfaceName + " <<interface>> {\n");
         Methodes_Interface mi = new Methodes_Interface(interfaceElement);
         mi.addInterface();
-        interfaceContent.append("}\n");
+        affiche.append("}\n");
 
     }
 }

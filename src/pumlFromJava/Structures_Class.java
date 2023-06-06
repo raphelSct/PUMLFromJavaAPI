@@ -8,10 +8,10 @@ public class Structures_Class extends Structures {
     }
     public void add_Class(Element classElement){
         String className = classElement.getSimpleName().toString();
-        affiche.append("class" + className + " { \n");
+        affiche.append("class " + className + " { \n");
         Methodes_Class mc = new Methodes_Class(classElement);
         mc.addElement();
-        affiche.append("}");
+        affiche.append("}\n");
 
     }
 
