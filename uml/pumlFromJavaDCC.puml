@@ -1,0 +1,184 @@
+@startuml
+skinparam style strictuml
+skinparam classFontStyle Bold
+skinparam classAttributeIconSize 0
+package pumlFromJava{
+class DCAClasses { 
+  + <<create>> DCAClasses() 
+  + addClass(classElement : Element ) 
+  - getTypeElement(typeMirror : TypeMirror ) : Element
+}
+
+class DCAEnum { 
+  + <<create>> DCAEnum() 
+  + addEnum(enumElement : Element ) 
+}
+
+class DCAInterface { 
+  + <<create>> DCAInterface() 
+  + addInterface(interfaceElement : Element ) 
+}
+
+class Element_Methodes { 
+  ~ classElem
+  ~ nomarg
+  + <<create>> Element_Methodes(classElement : Element ) 
+  + addTypes() 
+  - getTypeElement(typeMirror : TypeMirror ) : Element
+}
+
+class Heritages { 
+  + <<create>> Heritages() 
+  + addLink(element : Element ) 
+}
+
+class Java2Puml { 
+  + <<create>> Java2Puml() 
+  +{static} main(args : String [*]) 
+}
+
+class Methodes_Class { 
+  ~ classElem
+  ~ Agregs
+  + <<create>> Methodes_Class(classElement : Element ) 
+  + addElement() 
+  + isAgreg(element : Element enclosedElement : Element ) Boolean
+  - getTypeElement(typeMirror : TypeMirror ) : Element
+}
+
+class Methodes_Enum { 
+  ~ enumElement
+  + <<create>> Methodes_Enum(element : Element ) 
+  + addElement() 
+}
+
+class Methodes_Interface { 
+  ~ interfaceElement
+  + <<create>> Methodes_Interface(element : Element ) 
+  + addInterface() 
+}
+
+class OptionD { 
+  + <<create>> OptionD() 
+  - chemin
+  + getArgumentCount() Integer
+  + getDescription() : String
+  + getKind() : Kind
+  + getNames() : String[*]
+  + getParameters() : String
+  + process(option : String arguments : String [*]) Boolean
+  + getChemin() : String
+}
+
+class OptionOut { 
+  + <<create>> OptionOut() 
+  - nomFichier
+  + getArgumentCount() Integer
+  + getDescription() : String
+  + getKind() : Kind
+  + getNames() : String[*]
+  + getParameters() : String
+  + process(option : String arguments : String [*]) Boolean
+  + getNomFichier() : String
+}
+
+class PumlDiagram { 
+  -classList {ReadOnly}
+  -interfaceList {ReadOnly}
+  -enumList {ReadOnly}
+  - packageName
+  + <<create>> PumlDiagram() 
+  + addClass(classElement : Element ) 
+  + addInterface(interfaceElement : Element ) 
+  + addEnum(enumElement : Element ) 
+  + addPackage(packElement : Element ) 
+  + addLink(element : Element ) 
+  + generate(fileName : String ) 
+}
+
+class PumlDiagramDCA { 
+  -classList {ReadOnly}
+  -interfaceList {ReadOnly}
+  -enumList {ReadOnly}
+  - packageName
+  + <<create>> PumlDiagramDCA() 
+  + addClass(classElement : Element ) 
+  + addInterface(interfaceElement : Element ) 
+  + addEnum(enumElement : Element ) 
+  + addPackage(packElement : Element ) 
+  + addLink(element : Element ) 
+  + generate(fileName : String ) 
+}
+
+class PumlDoclet { 
+  + <<create>> PumlDoclet() 
+  + init(locale : Locale reporter : Reporter ) 
+  + getName() : String
+  + getSupportedOptions() : Set
+  + getSupportedSourceVersion() : SourceVersion
+  + run(environment : DocletEnvironment ) Boolean
+  - dumpElement(element : Element ) 
+}
+
+class Structures { 
+  #{static} affiche
+  #{static} subElements
+  + <<create>> Structures() 
+  + getVisibility(element : Element ) : String
+}
+
+class Structures_Class { 
+  + <<create>> Structures_Class() 
+  + add_Class(classElement : Element ) 
+}
+
+class Structures_Enum { 
+  + <<create>> Structures_Enum() 
+  + addEnum(enumElement : Element ) 
+}
+
+class Structures_Interface { 
+  + <<create>> Structures_Interface() 
+  + addInterface(interfaceElement : Element ) 
+}
+
+pumlFromJava.Structures <|-- pumlFromJava.DCAClasses
+pumlFromJava.Structures <|-- pumlFromJava.DCAEnum
+pumlFromJava.Structures <|-- pumlFromJava.DCAInterface
+pumlFromJava.Structures <|-- pumlFromJava.Element_Methodes
+pumlFromJava.Structures <|-- pumlFromJava.Heritages
+pumlFromJava.Structures <|-- pumlFromJava.Methodes_Class
+pumlFromJava.Structures <|-- pumlFromJava.Methodes_Enum
+pumlFromJava.Structures <|-- pumlFromJava.Methodes_Interface
+jdk.javadoc.doclet.Doclet.Option <|.. pumlFromJava.OptionD
+jdk.javadoc.doclet.Doclet.Option <|.. pumlFromJava.OptionOut
+pumlFromJava.PumlDiagram o-> "1 ~el" pumlFromJava.Structures
+
+pumlFromJava.PumlDiagram o-> "1 #link" pumlFromJava.Heritages
+
+pumlFromJava.PumlDiagram o-> "1 #Classes" pumlFromJava.Structures_Class
+
+pumlFromJava.PumlDiagram o-> "1 #Inter" pumlFromJava.Structures_Interface
+
+pumlFromJava.PumlDiagram o-> "1 #Enumer" pumlFromJava.Structures_Enum
+
+pumlFromJava.PumlDiagramDCA o-> "1 ~fd" pumlFromJava.Structures
+
+pumlFromJava.PumlDiagramDCA o-> "1 #Classes" pumlFromJava.DCAClasses
+
+pumlFromJava.PumlDiagramDCA o-> "1 #Inter" pumlFromJava.DCAInterface
+
+pumlFromJava.PumlDiagramDCA o-> "1 #Enumer" pumlFromJava.DCAEnum
+
+pumlFromJava.PumlDiagramDCA o-> "1 #link" pumlFromJava.Heritages
+
+pumlFromJava.PumlDoclet o-> "1 -out" pumlFromJava.OptionOut
+
+pumlFromJava.PumlDoclet o-> "1 -path" pumlFromJava.OptionD
+
+jdk.javadoc.doclet.Doclet <|.. pumlFromJava.PumlDoclet
+pumlFromJava.Structures <|-- pumlFromJava.Structures_Class
+pumlFromJava.Structures <|-- pumlFromJava.Structures_Enum
+pumlFromJava.Structures <|-- pumlFromJava.Structures_Interface
+}
+@enduml

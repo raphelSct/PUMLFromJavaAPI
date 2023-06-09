@@ -47,32 +47,28 @@ interface western.HorsLaLoi <<interface>> {
 interface western.Nommable <<interface>> {
 }
 
-enum western.Genre <<enumerate>> {
-FEMININ
-MASCULIN
-}
 
-western.HorsLaLoi <|.. western.Brigand
-western.Nommable <|.. western.Personnage
-western.HorsLaLoi <|.. western.Ripou
-western.Personnage <|-- western.Brigand
-western.Personnage <|-- western.Cowboy
-western.Personnage <|-- western.Dame
-western.Personnage <|-- western.Narrateur
-western.Cowboy <|-- western.Ripou
-western.Cowboy <|-- western.Sherif
 western.Boisson -- western.Substantif
 western.Boisson -- western.Boisson
 western.Brigand -- western.Cowboy
 western.Brigand -- western.Boisson
+western.HorsLaLoi <|.. western.Brigand
+western.Personnage <|-- western.Brigand
 western.Cowboy -- western.Boisson
+western.Personnage <|-- western.Cowboy
 western.Dame -- western.Cowboy
 western.Dame -- western.HorsLaLoi
 western.Dame -- western.Boisson
+western.Personnage <|-- western.Dame
+western.Personnage <|-- western.Narrateur
 western.Personnage -- western.Boisson
 western.Personnage -- western.Boisson
+western.Nommable <|.. western.Personnage
 western.Ripou -- western.Brigand
+western.HorsLaLoi <|.. western.Ripou
+western.Cowboy <|-- western.Ripou
 western.Sherif -- western.Cowboy
+western.Cowboy <|-- western.Sherif
 western.Substantif -- western.Genre
 }
 @enduml

@@ -4,8 +4,6 @@ skinparam classFontStyle Bold
 skinparam classAttributeIconSize 0
 package western{
 class Boisson { 
-  - substantif
-  +{static} EAU
   -{static} boissons
   +{static} of(nom : String genre : Genre ) : Boisson
   - <<create>> Boisson(nom : String genre : Genre ) 
@@ -23,7 +21,6 @@ class Brigand {
   - recompense
   - estLibre
   - captives
-  - gardien
   + <<create>> Brigand(nom : String ) 
   + <<create>> Brigand(nom : String boisson : Boisson ) 
   + <<create>> Brigand(nom : String boisson : Boisson look : String ) 
@@ -31,12 +28,11 @@ class Brigand {
   + getRecompense() Integer
   + estLibre() Boolean
   + kidnapper(dame : Dame ) 
-  + getCaptives() : List
+  + getCaptives() : Dame[*]
   + seFaireCapturer(cowBoy : Cowboy ) 
   + seFaireTirerDessus(cowBoy : Cowboy ) 
   + getPseudo() : String
   + sePresenter() 
-  -{static} boissonParDefaut
   +{static} getBoissonParDefaut() : Boisson
   +{static} setBoissonParDefaut(boisson : Boisson ) 
 }
@@ -48,19 +44,16 @@ class Cowboy {
   + <<create>> Cowboy(nom : String boisson : Boisson ) 
   + getPseudo() : String
   + liberer(dame : Dame ) 
-  + liberer(captives : List ) 
+  + liberer(captives : Dame [*]) 
   + capturer(horsLaLoi : HorsLaLoi ) 
   + tirerSur(brigand : HorsLaLoi ) 
   + sePresenter() 
-  -{static} boissonParDefaut
   +{static} getBoissonParDefaut() : Boisson
   +{static} setBoissonParDefaut(boisson : Boisson ) 
 }
 
 class Dame { 
   - estLibre
-  - sauveur
-  - ravisseur
   + <<create>> Dame(nom : String ) 
   + <<create>> Dame(nom : String boisson : Boisson ) 
   + getPseudo() : String
@@ -68,7 +61,6 @@ class Dame {
   + seFaireLiberer(cowBoy : Cowboy ) 
   + estLibre() Boolean
   + sePresenter() 
-  -{static} boissonParDefaut
   +{static} getBoissonParDefaut() : Boisson
   +{static} setBoissonParDefaut(boisson : Boisson ) 
   + getRavisseur() : HorsLaLoi
@@ -76,7 +68,7 @@ class Dame {
 
 class Histoire4 { 
   + <<create>> Histoire4() 
-  +{static} main(args : String ) 
+  +{static} main(args : String [*]) 
 }
 
 class Narrateur { 
@@ -89,9 +81,7 @@ class Narrateur {
 }
 
 class Personnage { 
-  -{static} BOISSON_PAR_DEFAUT
   - nom
-  - boisson
   + <<create>> Personnage(nom : String ) 
   + <<create>> Personnage(nom : String boisson : Boisson ) 
   + dire(texte : String ) 
@@ -100,12 +90,11 @@ class Personnage {
   + boire() 
   + getNom() : String
   + getBoisson() : Boisson
-  +{static} getPseudos(personnages : List ) : String
+  +{static} getPseudos(personnages : Nommable [*]) : String
   +{static} getBoissonParDefaut() : Boisson
 }
 
 class Ripou { 
-  - brigand
   + <<create>> Ripou(nom : String ) 
   + <<create>> Ripou(nom : String boisson : Boisson ) 
   + <<create>> Ripou(nom : String boisson : Boisson look : String ) 
@@ -113,7 +102,7 @@ class Ripou {
   + estLibre() Boolean
   + getRecompense() Integer
   + kidnapper(dame : Dame ) 
-  + getCaptives() : List
+  + getCaptives() : Dame[*]
   + seFaireCapturer(cowBoy : Cowboy ) 
   + seFaireTirerDessus(cowBoy : Cowboy ) 
   + getPseudo() : String
@@ -122,26 +111,24 @@ class Ripou {
 }
 
 class Sherif { 
-  - cowboy
   - wanted
   + <<create>> Sherif(nom : String ) 
   + <<create>> Sherif(nom : String boisson : Boisson ) 
   + getNom() : String
   + sePresenter() 
   + capturer(horsLaLoi : HorsLaLoi ) 
-  + getWanted() : List
+  + getWanted() : HorsLaLoi[*]
   + rechercher(horsLaLoi : HorsLaLoi ) 
   + isWanted(horsLaLoi : HorsLaLoi ) : Boolean
 }
 
 class Substantif { 
   - nom
-  - genre
   + <<create>> Substantif(nom : String genre : Genre ) 
   + getNom() : String
   + getGenre() : Genre
   + toString() : String
-  +{static} isVowel() Boolean
+  +{static} isVowel(c :  ) Boolean
   +{static} startsWithVowel(s : String ) Boolean
   + getArticleIndefini() : String
   + avecArticleIndefini() : String
@@ -163,7 +150,7 @@ interface HorsLaLoi <<interface>> {
   +  seFaireCapturer(cowBoy : Cowboy ) 
   +  seFaireTirerDessus(cowBoy : Cowboy ) 
   +  getLook() : String
-  +  getCaptives() : List
+  +  getCaptives() : Dame[*]
 }
 
 interface Nommable <<interface>> {
@@ -175,6 +162,41 @@ enum Genre <<enumerate>> {
   +{static} FEMININ
   +{static} MASCULIN
 }
+
+western.Boisson o-> "1 -substantif" western.Substantif
+
+western.Boisson o-> "1 +EAU" western.Boisson
+
+western.Brigand o-> "1 -gardien" western.Cowboy
+
+western.Brigand o-> "1 -boissonParDefaut" western.Boisson
+
+western.HorsLaLoi <|.. western.Brigand
+western.Personnage <|-- western.Brigand
+western.Cowboy o-> "1 -boissonParDefaut" western.Boisson
+
+western.Personnage <|-- western.Cowboy
+western.Dame o-> "1 -sauveur" western.Cowboy
+
+western.Dame o-> "1 -ravisseur" western.HorsLaLoi
+
+western.Dame o-> "1 -boissonParDefaut" western.Boisson
+
+western.Personnage <|-- western.Dame
+western.Personnage <|-- western.Narrateur
+western.Personnage o-> "1 -BOISSON_PAR_DEFAUT" western.Boisson
+
+western.Personnage o-> "1 -boisson" western.Boisson
+
+western.Nommable <|.. western.Personnage
+western.Ripou o-> "1 -brigand" western.Brigand
+
+western.HorsLaLoi <|.. western.Ripou
+western.Cowboy <|-- western.Ripou
+western.Sherif o-> "1 -cowboy" western.Cowboy
+
+western.Cowboy <|-- western.Sherif
+western.Substantif o-> "1 -genre" western.Genre
 
 }
 @enduml

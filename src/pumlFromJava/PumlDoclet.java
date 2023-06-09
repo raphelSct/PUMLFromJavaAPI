@@ -55,24 +55,26 @@ public class PumlDoclet implements Doclet {
         elements.addAll(element.getEnclosedElements());
 
         // Créer un diagramme UML à partir des éléments spécifiés.
-        PumlDiagram diagram = new PumlDiagram();
+        PumlDiagram dcc = new PumlDiagram();
         PumlDiagramDCA dca = new PumlDiagramDCA();
         for (Element e : elements) {
             if (e.getKind() == ElementKind.PACKAGE){
-                diagram.addPackage(e);
+
                 dca.addPackage(e);
             }
             if (e.getKind() == ElementKind.CLASS) {
-                diagram.addClass(e);
+
                 dca.addClass(e);
             } else if (e.getKind() == ElementKind.INTERFACE) {
-                diagram.addInterface(e);
+
                 dca.addInterface(e);
             } else if (e.getKind() == ElementKind.ENUM) {
-                diagram.addEnum(e);
+
                 dca.addEnum(e);
             }
             dca.addLink(e);
+
+
         }
 
         // Écrire le diagramme UML dans un fichier de sortie.
@@ -81,12 +83,44 @@ public class PumlDoclet implements Doclet {
         filenamedca= path.getChemin()+filenamedca;
         filenamedcc= path.getChemin()+filenamedcc;
         try {
-            diagram.generate(filenamedcc);
             dca.generate((filenamedca));
+
+
             System.out.println("Le diagramme UML a été écrit dans le fichier " + filenamedca + ".");
         }
         catch (FileNotFoundException e) {
             System.err.println("Erreur lors de l'écriture du fichier " + filenamedca + ".");
+            e.printStackTrace();
+        }
+        for (Element e : elements) {
+            if (e.getKind() == ElementKind.PACKAGE){
+                dcc.addPackage(e);
+
+            }
+            if (e.getKind() == ElementKind.CLASS) {
+                dcc.addClass(e);
+
+            } else if (e.getKind() == ElementKind.INTERFACE) {
+                dcc.addInterface(e);
+
+            } else if (e.getKind() == ElementKind.ENUM) {
+                dcc.addEnum(e);
+
+            }
+            dca.addLink(e);
+
+
+        }
+
+
+        try {
+
+            dcc.generate(filenamedcc);
+
+            System.out.println("Le diagramme UML a été écrit dans le fichier " + filenamedcc + ".");
+        }
+        catch (FileNotFoundException e) {
+            System.err.println("Erreur lors de l'écriture du fichier " + filenamedcc + ".");
             e.printStackTrace();
         }
 

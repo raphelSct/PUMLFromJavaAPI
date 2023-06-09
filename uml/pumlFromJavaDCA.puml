@@ -1,0 +1,91 @@
+@startuml
+skinparam style strictuml
+skinparam classFontStyle Bold
+skinparam classAttributeIconSize 0
+package pumlFromJava{
+class pumlFromJava.DCAClasses {
+}
+
+class pumlFromJava.DCAEnum {
+}
+
+class pumlFromJava.DCAInterface {
+}
+
+class pumlFromJava.Element_Methodes {
+}
+
+class pumlFromJava.Heritages {
+}
+
+class pumlFromJava.Java2Puml {
+}
+
+class pumlFromJava.Methodes_Class {
+}
+
+class pumlFromJava.Methodes_Enum {
+}
+
+class pumlFromJava.Methodes_Interface {
+}
+
+class pumlFromJava.OptionD {
+chemin
+}
+
+class pumlFromJava.OptionOut {
+nomFichier
+}
+
+class pumlFromJava.PumlDiagram {
+packageName
+}
+
+class pumlFromJava.PumlDiagramDCA {
+packageName
+}
+
+class pumlFromJava.PumlDoclet {
+}
+
+class pumlFromJava.Structures {
+}
+
+class pumlFromJava.Structures_Class {
+}
+
+class pumlFromJava.Structures_Enum {
+}
+
+class pumlFromJava.Structures_Interface {
+}
+
+pumlFromJava.Structures <|-- pumlFromJava.DCAClasses
+pumlFromJava.Structures <|-- pumlFromJava.DCAEnum
+pumlFromJava.Structures <|-- pumlFromJava.DCAInterface
+pumlFromJava.Structures <|-- pumlFromJava.Element_Methodes
+pumlFromJava.Structures <|-- pumlFromJava.Heritages
+pumlFromJava.Structures <|-- pumlFromJava.Methodes_Class
+pumlFromJava.Structures <|-- pumlFromJava.Methodes_Enum
+pumlFromJava.Structures <|-- pumlFromJava.Methodes_Interface
+jdk.javadoc.doclet.Doclet.Option <|.. pumlFromJava.OptionD
+jdk.javadoc.doclet.Doclet.Option <|.. pumlFromJava.OptionOut
+pumlFromJava.PumlDiagram -- pumlFromJava.Structures
+pumlFromJava.PumlDiagram -- pumlFromJava.Heritages
+pumlFromJava.PumlDiagram -- pumlFromJava.Structures_Class
+pumlFromJava.PumlDiagram -- pumlFromJava.Structures_Interface
+pumlFromJava.PumlDiagram -- pumlFromJava.Structures_Enum
+pumlFromJava.PumlDiagramDCA -- pumlFromJava.Structures
+pumlFromJava.PumlDiagramDCA -- pumlFromJava.DCAClasses
+pumlFromJava.PumlDiagramDCA -- pumlFromJava.DCAInterface
+pumlFromJava.PumlDiagramDCA -- pumlFromJava.DCAEnum
+pumlFromJava.PumlDiagramDCA -- pumlFromJava.Heritages
+pumlFromJava.PumlDoclet -- pumlFromJava.OptionOut
+pumlFromJava.PumlDoclet -- pumlFromJava.OptionD
+jdk.javadoc.doclet.Doclet <|.. pumlFromJava.PumlDoclet
+pumlFromJava.Structures <|-- pumlFromJava.Structures_Class
+pumlFromJava.Structures <|-- pumlFromJava.Structures_Enum
+pumlFromJava.Structures <|-- pumlFromJava.Structures_Interface
+}
+@enduml

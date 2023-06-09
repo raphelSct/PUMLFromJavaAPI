@@ -7,36 +7,22 @@ package javax.lang.model {
         + getModifiers(): Set<Modifier>
         + getSimpleName(): Name
         + getEnclosingElement(): Element
-        + getAnnotationMirrors(): List<? extends AnnotationMirror>
         + asType(): TypeMirror
-        + accept(v: ElementVisitor<R, P>, p: P): R
         + getEnclosedElements(): List<? extends Element>
-        + getAnnotation(a: Class<T>): T
+
     }
     interface TypeMirror {
         + getKind(): TypeKind
-        + <T> accept(v: TypeVisitor<T, P>, p: P): T
         + toString(): String
     }
-    interface TypeVisitor<R, P> {
-        + visit(t: TypeMirror): R
-        + visitPrimitive(t: PrimitiveType, p: P): R
-        + visitNull(t: NullType, p: P): R
-        + visitArray(t: ArrayType, p: P): R
-        + visitDeclared(t: DeclaredType, p: P): R
-        + visitError(t: ErrorType, p: P): R
-        + visitTypeVariable(t: TypeVariable, p: P): R
-        + visitWildcard(t: WildcardType, p: P): R
-    }
+
     interface TypeElement extends Element {
         + getQualifiedName(): Name
         + getInterfaces(): List<? extends TypeMirror>
         + getSuperclass(): TypeMirror
         + getTypeParameters(): List<? extends TypeParameterElement>
         + getEnclosingElement(): Element
-        + getNestingKind(): NestingKind
         + getSimpleName(): Name
-        + getAnnotation(a: Class<T>): T
         + getEnclosedElements(): List<? extends Element>
     }
     interface TypeParameterElement extends Element {
@@ -44,6 +30,7 @@ package javax.lang.model {
         + getGenericElement(): Element
         + getSimpleName(): Name
     }
+
     enum ElementKind {
         ANNOTATION_TYPE,
         CLASS,
@@ -73,12 +60,6 @@ package javax.lang.model {
         TRANSIENT,
         VOLATILE
     }
-    enum NestingKind {
-        ANONYMOUS,
-        LOCAL,
-        MEMBER,
-        TOP_LEVEL
-    }
     interface TypeKind {
         BOOLEAN,
         BYTE,
@@ -96,13 +77,6 @@ package javax.lang.model {
         WILDCARD,
         PACKAGE
     }
-    interface PackageElement extends Element {
-        + getQualifiedName(): Name
-        + getSimpleName(): Name
-        + isUnnamed(): boolean
-        + getEnclosingElement(): Element
-        + getAnnotation(a: Class<T>): T
-        + getEnclosedElements(): List<? extends Element>
-    }
+
 
 @enduml

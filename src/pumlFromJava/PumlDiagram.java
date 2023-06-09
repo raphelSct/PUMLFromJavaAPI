@@ -11,6 +11,7 @@ import java.util.Set;
 public class PumlDiagram {
 
     Structures el=new Structures();
+    protected Heritages link=new Heritages();
     protected Structures_Class Classes=new Structures_Class();
     protected Structures_Interface Inter=new Structures_Interface();
     protected  Structures_Enum Enumer=new Structures_Enum();
@@ -29,25 +30,30 @@ public class PumlDiagram {
 
     public void addClass(Element classElement) {
         Classes.add_Class(classElement);
-        classList.add(el.affiche.toString());
+        this.classList.add(el.affiche.toString());
         el.affiche.delete(0,el.affiche.length());
     }
 
     public void addInterface(Element interfaceElement) {
         Inter.addInterface(interfaceElement);
-        interfaceList.add(el.affiche.toString());
+        this.interfaceList.add(el.affiche.toString());
         el.affiche.delete(0,el.affiche.length());
     }
 
 
     public void addEnum(Element enumElement) {
         Enumer.addEnum(enumElement);
-        enumList.add(el.affiche.toString());
+        this.enumList.add(el.affiche.toString());
         el.affiche.delete(0,el.affiche.length());
     }
     public void addPackage(Element packElement){
         this.packageName = "package " + packElement.getSimpleName().toString() + "{";
     }
+    public void addLink(Element element){
+        link.addLink(element);
+
+    }
+
 
 
     public void generate(String fileName) throws FileNotFoundException {
@@ -68,6 +74,12 @@ public class PumlDiagram {
         for (String enumName : enumList) {
             writer.println(enumName );
         }
+        for(String liens : el.subElements){
+            writer.println(liens);
+        }
+        el.subElements.clear();
+
+
         writer.println("}");
         writer.println("@enduml");
         writer.close();

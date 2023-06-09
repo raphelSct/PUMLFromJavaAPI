@@ -1,0 +1,35 @@
+@startuml
+skinparam style strictuml
+skinparam classFontStyle Bold
+skinparam classAttributeIconSize 0
+package Test{
+class Test.A {
+anInt
+aShort
+aLong
+aByte
+aFloat
+aDouble
+aChar
+aBoolean
+}
+
+class Test.B {
+}
+
+class Test.C {
+}
+
+class Test.D {
+}
+
+class Test.E {
+}
+
+class Test.Java2PumlTest1 {
+}
+
+Test.D -- Test.A
+Test.D -- Test.B[]
+}
+@enduml

@@ -1,0 +1,97 @@
+@startuml
+skinparam style strictuml
+skinparam classFontStyle Bold
+skinparam classAttributeIconSize 0
+package Test{
+class A { 
+  ~ <<create>> A() 
+  - anInt
+  # aShort
+  ~ aLong
+  + aByte
+  -aFloat {ReadOnly}
+  #{static} aDouble
+  ~{static} aChar
+  +{static} aBoolean
+  - anIntFunction(anIntParam : Integer ) Integer
+  # aShortFunction(aShortParam : Integer ) Integer
+  ~ aLongFunction(aLongParam : Integer ) Integer
+  + aByteFunction(aByteParam : Integer ) Integer
+  -{static} aFloatFunction(aFloatParam : Real ) Real
+  #{static} aDoubleFunction(aDoubleParam : Real ) Real
+  ~{static} aCharFunction(aCharParam :  ) 
+  +{static} aBooleanFunction(aBooleanParam : Boolean ) Boolean
+}
+
+class B { 
+  ~ <<create>> B() 
+  - anInteger
+  # aShort
+  ~ aLong
+  + aByte
+  -aFloat {ReadOnly}
+  #{static} aDouble
+  ~{static} aCharacter
+  +{static} aBoolean
+  - anIntFunction(anIntParam : Integer ) : Integer
+  # aShortFunction(aShortParam : Short ) : Short
+  ~ aLongFunction(aLongParam : Long ) : Long
+  + aByteFunction(aByteParam : Byte ) : Byte
+  - aFloatFunction(aFloatParam : Float ) : Float
+  # aDoubleFunction(aDoubleParam : Double ) : Double
+  ~{static} aCharacterFunction(aCharacterParam : Character ) : Character
+  +{static} aBooleanFunction(aBooleanParam : Boolean ) : Boolean
+}
+
+class C { 
+  ~ <<create>> C() 
+  - anIntArray
+  # aShortArray
+  ~ anArrayOfLongArray
+  + anArrayOfByteArray
+  -aFloatList {ReadOnly}
+  #{static} aListOfDoubleList
+  ~{static} aSetOfCharacter
+  +{static} aSetOfBooleanList
+  - anIntArrayFunction(anIntArrayParam :  [*]) [*]
+  # aShortArrayFunction(aShortArrayParam : Short [*]) : Short[*]
+  ~ aLong3DArrayFunction(someLongs :  [*]) [*]
+  + aByte5DArrayFunction(someBytes : Byte [*]) : Byte[*]
+  - aFloatListFunction(aFloatListParam : Float [*]) : Float[*]
+  # aListOfDoubleListFunction(someDoubles : Double [*]) : Double[*]
+  ~ aCharacterSetFunction(aCharacterSetParam : Set ) : Set
+  + aSetOfBooleanListFunction(someBooleans : Collection ) : Set
+}
+
+class D { 
+  ~ <<create>> D() 
+  # cs
+  +{static} ds
+  - aFunction(a0 : A a1 : A a2 : A a3 : A [*]) : A
+  ~ bFunction(b0 : B b1 : B b2 : B b3 : B [*]) : B[*]
+  # cFunction(c0 : C c1 : C c2 : C c3 : C [*]) : C[*]
+  +{static} dFunction(d0 : D d1 : Collection d2 : HashSet d3 : ArrayList d4 : HashMap ) : Collection
+}
+
+class E { 
+  ~ <<create>> E() 
+  - mapOfInt
+  ~ mapOfDoubleArray
+  # mapOfA
+  + mapOfArrayOfA
+  - mapOfIntFunction(a0 : Map a1 : HashMap a2 : TreeMap a3 : Map ) : Map
+  ~ mapOfDoubleArrayFunction(a0 : Map a1 : Map a2 : HashMap a3 : TreeMap ) : Map
+  # mapOfAFunction(a0 : Map a1 : Map a2 : Map a3 : Map ) : Map
+  +{static} mapOfArrayOfAFunction(a0 : Map a1 : Map a2 : Map a3 : TreeMap ) : Map
+}
+
+class Java2PumlTest1 { 
+  + <<create>> Java2PumlTest1() 
+}
+
+Test.D o-> "1 -a" Test.A
+
+Test.D o--> "* ~bs" Test.B
+
+}
+@enduml
