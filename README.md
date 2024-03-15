@@ -1,7 +1,28 @@
-P21-P22 SAE21 2023  
-SCR - IUT R. Schuman
-
 Projet *PumlFromJava*
+---
+
+Le but de cette API est de Générer un fichier PUML à partir du code d'une application en Java. L'API va parcourir le code de l'application pour générer le fichier PUML en fonction des différentes classes et objets présents. 
+Ce projet est un projet tutoré et a été réalisé dans le Cadre de ma 1ère année de BUT. Il a été rendu complété à 80%.
+
+### Installation/Utilisation de l'API
+
+Il faut récupérer le code et mettre le code de votre application dans le fihcier src (pour plus de simplicité).
+Ensuite vous devez changer les configurations d'execution et mettre ces paramètres dans la partie "CLI arguments to your application" :
+-private
+-sourcepath
+src/models
+-doclet
+pumlFromJava.PumlDoclet
+-docletpath
+out/production/models/
+-out
+[Le chemin vers votre application]
+-d
+uml/
+[Le nom du fichier uml de votre Application]
+
+
+## Consignes que nous avons reçu pour réaliser ce projet
 ---
 
 L'objectif du projet est de générer automatiquement le source PlantUML de diagrammes de classes UML (DCA et DCC)
